@@ -1,0 +1,5 @@
+.template-first-paragraph, .template-last-paragraph{
+    margin: 5px;
+    padding: 10px;
+    border: 2px solid black;
+}

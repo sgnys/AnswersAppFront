@@ -1,0 +1,13 @@
+button, .btn-links {
+    margin:10px;
+    background-color: #2A913E;
+    padding: 2px 35px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: transparent;
+    border-radius: 2px;
+    line-height: 22px;
+    text-decoration: none;
+}
