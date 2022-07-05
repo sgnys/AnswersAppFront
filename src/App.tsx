@@ -4,11 +4,12 @@ import {MainView} from "./views/MainView";
 
 import {Route, Routes, Navigate} from "react-router-dom";
 import {Header} from "./components/Header/Header";
-import { AddAnswerFormView } from './views/AddAnswerFormView';
 import {TemplatesView} from "./views/TemplatesView";
 import { GetSingleTemplate } from './components/TemplatesComponents/GetSingleTemplate/GetSingleTemplate';
 
 import './App.css';
+import {AddAnswer} from "./components/AnswersComponents/AddAnswer/AddAnswer";
+import {GetSingleAnswer} from "./components/AnswersComponents/GetSingleAnswer/GetSingleAnswer";
 
 export const App = () => {
 
@@ -19,7 +20,8 @@ export const App = () => {
             <Routes>
                 <Route path="/" element={<Navigate to="/answers" replace />}/>
                 <Route path="/answers" element={<MainView/>}/>
-                <Route path="/answers/form-add" element={<AddAnswerFormView/>}/>
+                <Route path="/answers/:id" element={<GetSingleAnswer/>}/>
+                <Route path="/answers/form-add" element={<AddAnswer/>}/>
                 <Route path="/templates" element={<TemplatesView/>}/>
                 <Route path="/templates/:id" element={<GetSingleTemplate/>}/>
                 {/*<Route path="*" element={<NotFoundView/>}/>*/}

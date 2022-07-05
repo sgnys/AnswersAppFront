@@ -43,8 +43,7 @@ export const TemplateEditForm = (props: Props) => {
                 })
 
                 const data: GetSingleTemplateRes = await res.json();
-                console.log(data);
-                setResultInfo(`Szablon dla ${data.template.name === 'customer' ? 'Klienta' : 'Konsultanta'}, został zmodyfikowany.`);
+                setResultInfo(`Szablon odpowiedzi do ${data.template.name === 'customer' ? 'Klienta' : 'Konsultanta'} został zmodyfikowany.`);
             } finally {
                 setLoading(false);
             }
@@ -67,7 +66,6 @@ export const TemplateEditForm = (props: Props) => {
         return (
             <>
                 <h2>Formularz do Edycji szablonu</h2>
-                <p>{params.id}</p>
 
                 <form className='template-edit-form' onSubmit={sendForm}>
                     <label>

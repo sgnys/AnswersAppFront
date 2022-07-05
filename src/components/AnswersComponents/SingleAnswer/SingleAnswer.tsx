@@ -10,11 +10,36 @@ import {Btn} from "../../../common/Btn";
 
 interface Props {
     answer: AnswerEntity;
-    templatesList: TemplateEntity[]
+    templatesList: TemplateEntity[];
+    onAnswersListChange: ()=> Promise<void>;
 }
 
-export const SingleAnswer = (props: Props) => (
+export const SingleAnswer = (props: Props) => {
 
+    const handleDeleteAnswer = async(id: string)=>{
+
+        if (!window.confirm(`Czy na pewno chcesz usunąć tę odpowiedź?`)) {
+            return;
+        }
+        //TODO zrobic ładniejszy popup
+
+        const res = await fetch(`http://localhost:3001/answers/${id}`, {
+            method: 'DELETE',
+        })
+        console.log(res)// obiekt odpowiedzi, który zawiera też odpowiedzi błędu
+
+        if ([400, 500].includes(res.status)) {
+            const error = await res.json();
+            alert(`Error occured: ${error.message}`)
+            return // jeżeli jest błąd to kończymy
+        }
+        //TODO oprogramowane błędy pokazać na FE
+
+       await props.onAnswersListChange();
+    }
+
+
+    return(
     <div className="answer-wrap">
         <div className="answer-dates">
             <span className="answer-dates-added">dodana: <>{props.answer.createdAt}</></span>
@@ -28,9 +53,9 @@ export const SingleAnswer = (props: Props) => (
         </div>
         <span className="answer-category">{props.answer.category}</span>
         <div className='answer-btns'>
-            <Btn text={'Kopiuj'}/>
-            <Btn text={'Edytuj'}/>
-            <Btn text={'Usuń'}/>
+            <Btn text='Kopiuj'/>
+            <Btn to={`/answers/${props.answer.id}`} text='Edytuj'/>
+            <button onClick={()=>handleDeleteAnswer(props.answer.id as string)}>Usuń</button>
         </div>
     </div>
-)
+)}

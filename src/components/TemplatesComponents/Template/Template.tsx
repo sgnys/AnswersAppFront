@@ -1,5 +1,5 @@
 import React from 'react';
-import {TemplateEntity} from 'types';
+import {CustomerOrConsultant, TemplateEntity} from 'types';
 import {AnswerText} from "../../AnswersComponents/AnswerText/AnswerText";
 import {Btn} from "../../../common/Btn";
 
@@ -9,10 +9,6 @@ interface Props {
     template: TemplateEntity;
 }
 
-enum CustomerOrConsultant {
-    CUSTOMER = 'customer',
-    CONSULTANT = 'consultant',
-}
 
 export const Template = (props: Props) => {
 

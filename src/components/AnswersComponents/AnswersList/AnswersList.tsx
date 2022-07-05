@@ -8,7 +8,6 @@ import {useLocation} from "react-router-dom";
 
 import './AnswersList.css';
 
-
 export const AnswersList = () => {
     const [data, setData] = useState<ListAnswersRes | null>(null);
     let location = useLocation();
@@ -16,8 +15,7 @@ export const AnswersList = () => {
     useEffect(() => {
         refreshLists(location.pathname, setData);
 
-    }, []);
-
+    }, [])
 
     if (data === null) return <Spinner/>
 
@@ -25,7 +23,10 @@ export const AnswersList = () => {
     return (
         <>
             <section className="answers-list">
-                <AnswerContent answersList={data.answersList} templatesList={data.templatesList}/>
+                <AnswerContent
+                    answersList={data.answersList}
+                    templatesList={data.templatesList}
+                    onAnswersListChange={() => refreshLists(location.pathname, setData)}/>
             </section>
         </>
     )
