@@ -22,6 +22,11 @@ export const AnswersList = () => {
 
     return (
         <>
+            <section className='answers-sort'>
+
+
+            </section>
+
             <section className="answers-list">
                 <AnswerContent
                     answersList={data.answersList}

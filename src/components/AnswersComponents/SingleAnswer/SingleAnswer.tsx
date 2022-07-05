@@ -7,6 +7,7 @@ import './SingleAnswer.css';
 import {AnswerText} from "../AnswerText/AnswerText";
 import {findTemplateFirstParagraph, findTemplateLastParagraph} from "../../../utils/findTemplateParagraphs";
 import {Btn} from "../../../common/Btn";
+import {changeDate} from "../../../utils/changeDate";
 
 interface Props {
     answer: AnswerEntity;
@@ -38,13 +39,15 @@ export const SingleAnswer = (props: Props) => {
        await props.onAnswersListChange();
     }
 
+    console.log(typeof props.answer.createdAt)
+    console.log(props.answer.createdAt)
 
     return(
     <div className="answer-wrap">
         <div className="answer-dates">
-            <span className="answer-dates-added">dodana: <>{props.answer.createdAt}</></span>
+            <span className="answer-dates-added">dodano: {changeDate(props.answer.createdAt)}</span>
             <span
-                className="answer-dates-modified"> <>{props.answer.modifiedAt && `zmieniono: ${props.answer.modifiedAt}`}</></span>
+                className="answer-dates-modified"> {props.answer.modifiedAt && `zmodyfikowano: ${changeDate(props.answer.modifiedAt)}`}</span>
         </div>
         <div className="answer-element">
             <AnswerText text={findTemplateFirstParagraph(props.answer.templateId, props.templatesList)}/>
