@@ -39,9 +39,6 @@ export const SingleAnswer = (props: Props) => {
        await props.onAnswersListChange();
     }
 
-    console.log(typeof props.answer.createdAt)
-    console.log(props.answer.createdAt)
-
     return(
     <div className="answer-wrap">
         <div className="answer-dates">

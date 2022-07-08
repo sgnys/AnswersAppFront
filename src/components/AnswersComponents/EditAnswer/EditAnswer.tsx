@@ -1,6 +1,7 @@
 import React, {FormEvent, useState} from 'react';
 import {AnswerEntity, AnswerGroupEnum, CreateAnswerReq, CustomerOrConsultant, TemplateEntity} from 'types';
 import {Btn} from "../../../common/Btn";
+import {Spinner} from "../../../common/Spinner";
 
 interface Props {
     answer: AnswerEntity;
@@ -48,6 +49,7 @@ export const EditAnswer = (props: Props) => {
         }
     }
 
+    if (loading) return <Spinner/>
 
     if (resultInfo !== null) {
         return (

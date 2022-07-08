@@ -35,6 +35,7 @@ export const AddAnswer = () => {
 
         setLoading(true);
 
+
         try {
             const res = await fetch(`http://localhost:3001/answers`, {
                 method: 'POST',
@@ -55,7 +56,7 @@ export const AddAnswer = () => {
         }
     }
 
-
+    if (loading) return <Spinner/>
     if (templates === null) return <Spinner/>
 
 
