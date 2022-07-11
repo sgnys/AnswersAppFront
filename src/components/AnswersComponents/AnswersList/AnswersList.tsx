@@ -41,12 +41,13 @@ export const AnswersList = () => {
             </section>
 
             <section className='answers-search'>
+                <p>Ilość wyświetlanych odpowiedzi: {filterTasks.length}</p>
                 <label htmlFor="search">
                     Wyszukaj:
                     <input
-                        type='text'
+                        type='search'
                         id='search'
-                        placeholder='Wyszukaj'
+                        placeholder='szukaj...'
                         value={searchText}
                         onChange={(e)=> setSearch(e.target.value)}
                     />
