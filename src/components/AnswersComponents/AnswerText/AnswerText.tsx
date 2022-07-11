@@ -12,19 +12,20 @@ export const AnswerText = (props: Props) => {
     return (
 
         <>
-            {props.text.split('\n').map((item: string) => {
-                    ++randomIndex;
+                {props.text.split('\n').map((item: string) => {
+                        ++randomIndex;
 
-                    return (
+                        return (
 
-                        <span key={randomIndex} className="answer-element-text">
+                            <span key={randomIndex} className="answer-element-text">
                      {item}
-                            <br/>
+                                <br/>
                  </span>
 
-                    )
-                }
-            )}
+                        )
+                    }
+                )}
+
         </>
     )
 }
