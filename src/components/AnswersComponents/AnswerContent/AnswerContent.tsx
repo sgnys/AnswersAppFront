@@ -9,6 +9,14 @@ interface Props {
 }
 
 export const AnswerContent = (props: Props) => {
+    if (!props.answersList.length) {
+        return (
+            <div>
+                <h3>Na liście nie ma takiej odpowidzi</h3>
+            </div>
+        )
+    }
+
     return (
         <>
             {
