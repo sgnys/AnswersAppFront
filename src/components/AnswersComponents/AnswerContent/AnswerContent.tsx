@@ -12,7 +12,7 @@ export const AnswerContent = (props: Props) => {
     if (!props.answersList.length) {
         return (
             <div>
-                <h3>Na liście nie ma takiej odpowidzi</h3>
+                <h3>Lista odpowiedzi jest pusta</h3>
             </div>
         )
     }

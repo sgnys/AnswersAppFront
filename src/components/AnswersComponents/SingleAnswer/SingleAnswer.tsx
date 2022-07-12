@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 import {AnswerEntity, TemplateEntity} from "types";
 
 import './SingleAnswer.css';
@@ -8,6 +8,8 @@ import {AnswerText} from "../AnswerText/AnswerText";
 import {findTemplateFirstParagraph, findTemplateLastParagraph} from "../../../utils/findTemplateParagraphs";
 import {Btn} from "../../../common/Btn";
 import {changeDate} from "../../../utils/changeDate";
+import {Spinner} from "../../../common/Spinner";
+import {ErrorView} from "../../../views/ErrorView";
 
 interface Props {
     answer: AnswerEntity;
@@ -16,6 +18,9 @@ interface Props {
 }
 
 export const SingleAnswer = (props: Props) => {
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
+
     const divRef = useRef<HTMLDivElement | null>(null);
     const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -26,18 +31,6 @@ export const SingleAnswer = (props: Props) => {
                 if (btnRef.current) btnRef.current.textContent = "kopiuj"
             }, 200)
         }
-
-        const res = await fetch(`http://localhost:3001/answers/count/${id}`, {
-            method: 'PUT',
-        })
-        console.log(res)// obiekt odpowiedzi, który zawiera też odpowiedzi błędu
-
-        if ([400, 500].includes(res.status)) {
-            const error = await res.json();
-            alert(`Error occured: ${error.message}`)
-            return // jeżeli jest błąd to kończymy
-        }
-
 
         if (divRef.current) {
             /**
@@ -53,6 +46,10 @@ export const SingleAnswer = (props: Props) => {
 
             await navigator.clipboard.writeText(divRef.current.innerText);
         }
+
+        const res = await fetch(`http://localhost:3001/answers/count/${id}`, {
+            method: 'PUT',
+        })
     }
 
     const handleDeleteAnswer = async (id: string) => {
@@ -62,20 +59,37 @@ export const SingleAnswer = (props: Props) => {
         }
         //TODO zrobic ładniejszy popup
 
-        const res = await fetch(`http://localhost:3001/answers/${id}`, {
-            method: 'DELETE',
-        })
-        console.log(res)// obiekt odpowiedzi, który zawiera też odpowiedzi błędu
+        setLoading(true);
 
-        if ([400, 500].includes(res.status)) {
-            const error = await res.json();
-            alert(`Error occured: ${error.message}`)
-            return // jeżeli jest błąd to kończymy
+        try {
+            const res = await fetch(`http://localhost:3001/answers/${id}`, {
+                method: 'DELETE',
+            })
+
+            if (res.status === 404) {
+                throw new Error("Nie można połączyć się z serwerem")
+            }
+
+            if ([400, 500].includes(res.status)) {
+
+                const error = await res.json();
+                setError(error.message);
+                throw new Error(error.message);
+
+            }
+
+            await props.onAnswersListChange();
+
+        } catch (error: any) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
         }
-        //TODO oprogramowane błędy pokazać na FE
-
-        await props.onAnswersListChange();
     }
+
+    if (error) return <ErrorView message={error}/>
+    if (loading) return <Spinner/>
+
 
     return (
         <div className="answer-wrap">
@@ -98,3 +112,4 @@ export const SingleAnswer = (props: Props) => {
         </div>
     )
 }
+

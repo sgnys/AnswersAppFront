@@ -2,27 +2,29 @@ import React, {useEffect, useState} from "react";
 import {AnswerEntity, AnswerGroupEnum, ListAnswersRes} from 'types';
 import {Spinner} from "../../../common/Spinner";
 import {AnswerContent} from "../AnswerContent/AnswerContent";
-import {refreshLists} from "../../../utils/refreshLists";
+import {refreshLists} from "../../../fetch/refreshLists";
 import {useLocation} from "react-router-dom";
 import {SortAnswers} from "../SortAnswers/SortAnswers";
 
 import './AnswersList.css';
+import {ErrorView} from "../../../views/ErrorView";
 
 export const AnswersList = () => {
     const [data, setData] = useState<ListAnswersRes | null>(null);
     const [category, setCategory] = useState('all');
     const [searchText, setSearch] = useState('');
+    const [error, setError] = useState('');
     let location = useLocation();
 
     useEffect(() => {
         if (category === AnswerGroupEnum.ALL) {
-            refreshLists(location.pathname, setData);
+            refreshLists(location.pathname, setData, setError);
         } else {
-            refreshLists(`/answers/sort/${category}`, setData);
+            refreshLists(`/answers/sort/${category}`, setData, setError);
         }
     }, [category])
 
-
+    if(error) return <ErrorView message={error}/>
     if (data === null) return <Spinner/>
 
     const filterTasks: AnswerEntity[] = [...data.answersList].filter(answer => {
@@ -31,6 +33,7 @@ export const AnswersList = () => {
         } else if (answer.text.toLowerCase().includes(searchText.toLowerCase())) {
             return answer
         }
+        return null
     });
 
 
@@ -58,7 +61,7 @@ export const AnswersList = () => {
                 <AnswerContent
                     answersList={filterTasks}
                     templatesList={data.templatesList}
-                    onAnswersListChange={() => refreshLists(location.pathname, setData)}/>
+                    onAnswersListChange={() => refreshLists(location.pathname, setData, setError)}/>
             </section>
         </>
     )
