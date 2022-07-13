@@ -8,7 +8,6 @@ interface Props {
 }
 
 export const ErrorView = (props: Props) => {
-    console.log(props)
 
     return (
         <>
