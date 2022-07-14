@@ -14,12 +14,12 @@ export const Template = (props: Props) => {
 
     return (
         <div className='template'>
-            <p>{props.template.name === CustomerOrConsultant.CUSTOMER ? 'Do Klienta' : 'Do Konsultanta'}</p>
-            <p>Akapit Powitania</p>
+            <p className="template-name">{props.template.name === CustomerOrConsultant.CUSTOMER ? 'Do Klienta' : 'Do Konsultanta'}</p>
+            <p className= "template-info">Akapit Powitania:</p>
             <div className='template-first-paragraph'>
                 <AnswerText text={props.template.firstParagraph}/>
             </div>
-            <p>Akapit Pożegnania</p>
+            <p className= "template-info">Akapit Pożegnania:</p>
             <div className='template-last-paragraph'>
                 <AnswerText text={props.template.lastParagraph}/>
             </div>

@@ -3,7 +3,6 @@ import {AnswerEntity, TemplateEntity} from "types";
 
 import './SingleAnswer.css';
 
-
 import {AnswerText} from "../AnswerText/AnswerText";
 import {findTemplateFirstParagraph, findTemplateLastParagraph} from "../../../utils/findTemplateParagraphs";
 import {Btn} from "../../../common/Btn";
@@ -103,7 +102,9 @@ export const SingleAnswer = (props: Props) => {
                 <AnswerText text={props.answer.text}/>
                 <AnswerText text={findTemplateLastParagraph(props.answer.templateId, props.templatesList)}/>
             </div>
-            <span className="answer-category">{props.answer.category}</span>
+            <div className="answer-category-content">
+                <span className="answer-category-span">{props.answer.category}</span>
+            </div>
             <div className='answer-btns'>
                 <button ref={btnRef} onClick={() => handleCopyAnswer(props.answer.id as string)}>Kopiuj</button>
                 <Btn to={`/answers/${props.answer.id}`} text='Edytuj'/>

@@ -28,7 +28,7 @@ export const EditAnswer = (props: Props) => {
 
     const sendForm = async (e: FormEvent) => {
         e.preventDefault();
-        if(!(form.text.trim().length < 3)){
+        if (!(form.text.trim().length < 3)) {
 
             setLoading(true);
 
@@ -74,84 +74,108 @@ export const EditAnswer = (props: Props) => {
 
     if (resultInfo !== null) {
         return (
-            <div>
-                <p><strong>{resultInfo}</strong></p>
+            <>
+                <div className="result-info">
+                    <p><strong>{resultInfo}</strong></p>
+                </div>
                 <Btn to="/" text='Powród do głównego widoku aplikacji'/>
-            </div>
-
+            </>
         )
     }
     return (
         <>
+            <div className="wrap">
+                <h2 className="answer-title">Edytuj Odpowiedź</h2>
 
-            <h2>Edytuj Odpowiedź</h2>
+                <form onSubmit={sendForm} className="answer-form">
+                    <div className="answer-form-wrap">
+                        <div className="answer-template">
+                            <label>
+                                <span>Rodzaj szablonu</span>
+                                <select
+                                    name="templateId"
+                                    value={form.templateId ?? ""}
+                                    onChange={e => updateForm("templateId", e.target.value)}
+                                >
+                                    <>
+                                        <option value="">Pusty</option>
+                                        {
+                                            props.templatesList.map(template => (
+                                                <option key={template.id} value={template.id}>
+                                                    {template.name === CustomerOrConsultant.CUSTOMER ? 'Klient' : 'Konsultant'}
+                                                </option>
+                                            ))
+                                        }
 
-            <form onSubmit={sendForm}>
-                <label>
-                    Rodzaj szablonu
-                    <select
-                        name="templateId"
-                        value={form.templateId ?? ""}
-                        onChange={e => updateForm("templateId", e.target.value)}
-                    >
-                        <>
-                            <option value="">Pusty</option>
-                            {
-                                props.templatesList.map(template => (
-                                    <option key={template.id} value={template.id}>
-                                        {template.name === CustomerOrConsultant.CUSTOMER ? 'Klient' : 'Konsultant'}
-                                    </option>
-                                ))
-                            }
+                                    </>
+                                </select>
+                            </label>
+                        </div>
 
-                        </>
-                    </select>
-                </label>
-                <br/>
-                <br/>
+                        <div className="answer-text">
+                            <label>
+                                <span>Edytuj treść:</span>
+                                <textarea
+                                    name="text"
+                                    value={form.text}
+                                    onChange={e => updateForm("text", e.target.value)}
+                                    placeholder="Wpisz..."></textarea>
+                                {form.text.trim().length < 3 &&
+                                    <span
+                                        className='span-validation'>Treść odpowiedzi musi posiadać minimum 3 znaki</span>}
+                            </label>
+                        </div>
 
-                <label> Podaj treść:
-                    <textarea
-                        name="text"
-                        value={form.text}
-                        onChange={e => updateForm("text", e.target.value)}
-                        placeholder="Wpisz..."></textarea>
-                    {form.text.trim().length < 3 &&
-                        <span className='span-validation'>Treść odpowiedzi musi posiadać minimum 3 znaki</span>}
-                    <br/>
-                </label>
 
-                <label>
-                    <input type="radio" value={AnswerGroupEnum.IT} checked={form.category === 'it'}
-                           onChange={e => updateForm('category', e.target.value)}
-                    />
-                    IT
-                </label>
-                <label>
-                    <input type="radio" value={AnswerGroupEnum.TELCO} checked={form.category === 'telco'}
-                           onChange={e => updateForm('category', e.target.value)}
-                    />
+                        <div className="categories">
+                            <div className="category-element">
+                                <label>
+                                    <input type="radio" value={AnswerGroupEnum.IT} checked={form.category === 'it'}
+                                           onChange={e => updateForm('category', e.target.value)}
+                                    />
+                                    IT
+                                </label>
+                            </div>
 
-                    TELCO
-                </label>
-                <label>
-                    <input type="radio" value={AnswerGroupEnum.PREPAID} checked={form.category === 'prepaid'}
-                           onChange={e => updateForm('category', e.target.value)}
-                    />
+                            <div className="category-element">
+                                <label>
+                                    <input type="radio" value={AnswerGroupEnum.TELCO}
+                                           checked={form.category === 'telco'}
+                                           onChange={e => updateForm('category', e.target.value)}
+                                    />
 
-                    PREPAID
-                </label>
-                <label>
-                    <input type="radio" value={AnswerGroupEnum.OTHER} checked={form.category === 'other'}
-                           onChange={e => updateForm('category', e.target.value)}
-                    />
+                                    TELCO
+                                </label>
+                            </div>
 
-                    INNE
-                </label>
-                <br/>
-                <br/>
-                <Btn text="Zapisz"/>
-            </form>
+                            <div className="category-element">
+                                <label>
+                                    <input type="radio" value={AnswerGroupEnum.PREPAID}
+                                           checked={form.category === 'prepaid'}
+                                           onChange={e => updateForm('category', e.target.value)}
+                                    />
+
+                                    PREPAID
+                                </label>
+                            </div>
+
+                            <div className="category-element">
+                                <label>
+                                    <input type="radio" value={AnswerGroupEnum.OTHER}
+                                           checked={form.category === 'other'}
+                                           onChange={e => updateForm('category', e.target.value)}
+                                    />
+
+                                    INNE
+                                </label>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <Btn text="Zapisz"/>
+                </form>
+            </div>
             <Btn to="/" text='Powród do głównego widoku aplikacji'/>
         </>
     )

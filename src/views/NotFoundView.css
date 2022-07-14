@@ -1,6 +1,9 @@
 .not-found{
-    border: 1px solid red;
-    margin:5px;
+    display:flex;
+    justify-content: center;
+    max-width:1280px;
+    margin:50px auto;
     padding:15px;
-    background-color: #ff9582;
+    border: 1px solid white;
+    background-color: red;
 }

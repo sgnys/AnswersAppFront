@@ -27,7 +27,6 @@ export const App = () => {
                 <Route path="/templates" element={<TemplatesView/>}/>
                 <Route path="/templates/:id" element={<GetSingleTemplate/>}/>
                 <Route path="*" element={<NotFoundView/>}/>
-
             </Routes>
         </>
 

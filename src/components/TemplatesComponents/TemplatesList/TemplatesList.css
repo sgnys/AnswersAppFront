@@ -1,6 +1,11 @@
-h2{
-    margin: 10px;
+.templates{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
-p{
-    margin:10px;
-}
+
+/*.templates + a.btn-links{*/
+/*    !*width:300px;*!*/
+/*    display:block;*/
+/*    margin: 30px auto;*/
+/*}*/

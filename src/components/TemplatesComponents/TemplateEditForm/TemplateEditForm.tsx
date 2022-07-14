@@ -1,11 +1,11 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useParams} from "react-router-dom";
-import {GetSingleTemplateRes, TemplateEntity,} from 'types';
+import {CustomerOrConsultant, GetSingleTemplateRes, TemplateEntity,} from 'types';
 import {Spinner} from "../../../common/Spinner";
 import {Btn} from "../../../common/Btn"
+import {ErrorView} from "../../../views/ErrorView";
 
 import './TemplateEditForm.css';
-import {ErrorView} from "../../../views/ErrorView";
 
 interface Props {
     template: TemplateEntity;
@@ -70,56 +70,72 @@ export const TemplateEditForm = (props: Props) => {
         }
     }
 
-    if(error) return <ErrorView message={error}/>
+    if (error) return <ErrorView message={error}/>
     if (loading) return <Spinner/>
 
 
     if (resultInfo !== null) {
         return (
-            <div>
-                <p><strong>{resultInfo}</strong></p>
-                <button onClick={() => setResultInfo(null)}>Wróć do edycji szablonu</button>
-            </div>
+            <>
+                <div className="result-info">
+                    <p><strong>{resultInfo}</strong></p>
+                </div>
+                <button className="result-info-btn" onClick={() => setResultInfo(null)}>Wróć do edycji szablonu</button>
+            </>
         )
     }
 
 
     return (
         <>
-            <h2>Formularz do Edycji szablonu</h2>
+            <div className="wrap template-wrap">
+                <h2 className="template-title">
+                    Formularz Edycji
+                    Szablonu <span>( {props.template.name === CustomerOrConsultant.CUSTOMER ? 'Klient' : 'Konsultant'} )</span>
+                </h2>
 
-            <form className='template-edit-form' onSubmit={sendForm}>
-                <label>
-                    Akapit Powitania: <br/>
-                    <textarea
-                        name='firstParagraph'
-                        value={firstParagraph}
-                        maxLength={200}
-                        minLength={3}
-                        onChange={handleChangeFirstParagraph}
-                    />
-                    {(firstParagraph.trim().length < 3 || firstParagraph.length > 200)
-                        &&
-                        <span className='span-validation'>Ten akapit musi mieć od 3 do 200 znaków</span>}
-                </label>
-                <br/>
-                <label>
-                    Akapit Pożegnania: <br/>
-                    <textarea
-                        name='lastParagraph'
-                        value={lastParagraph}
-                        maxLength={300}
-                        minLength={3}
-                        onChange={handleChangeLastParagraph}
-                    />
-                    {(lastParagraph.trim().length < 3 || lastParagraph.length > 300)
-                        &&
-                        <span className='span-validation'>Ten akapit musi mieć od 3 do 300 znaków</span>}
-                </label>
-                <button type="submit">Zapisz</button>
-            </form>
-            <Btn to="/templates" text='Powród do szablonów'/>
-            <Btn to="/" text='Powród do głównego widoku aplikacji'/>
+                <form className='template-form' onSubmit={sendForm}>
+                    <div className="template-form-wrap">
+                        <div className="template-content">
+                            <label>
+                                <p>Akapit Powitania:</p>
+                                <textarea
+                                    name='firstParagraph'
+                                    value={firstParagraph}
+                                    maxLength={200}
+                                    minLength={3}
+                                    onChange={handleChangeFirstParagraph}
+                                />
+                                {(firstParagraph.trim().length < 3 || firstParagraph.length > 200)
+                                    &&
+                                    <span className='span-validation'>Ten akapit musi mieć od 3 do 200 znaków</span>}
+                            </label>
+                        </div>
+
+
+                        <div className="template-content">
+                            <label>
+                                <p>Akapit Pożegnania:</p>
+                                <textarea
+                                    name='lastParagraph'
+                                    value={lastParagraph}
+                                    maxLength={300}
+                                    minLength={3}
+                                    onChange={handleChangeLastParagraph}
+                                />
+                                {(lastParagraph.trim().length < 3 || lastParagraph.length > 300)
+                                    &&
+                                    <span className='span-validation'>Ten akapit musi mieć od 3 do 300 znaków</span>}
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit">Zapisz</button>
+                </form>
+            </div>
+            <div className="template-btns">
+                <Btn to="/templates" text='Powród do szablonów'/>
+                <Btn to="/" text='Powród do głównego widoku aplikacji'/>
+            </div>
         </>
     )
 }

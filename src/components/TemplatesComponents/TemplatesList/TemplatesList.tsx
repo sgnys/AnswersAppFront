@@ -5,7 +5,6 @@ import {ListTemplatesRes} from 'types';
 import {useLocation} from "react-router-dom";
 import {refreshLists} from "../../../fetch/refreshLists";
 import {Template} from '../Template/Template';
-import {Btn} from "../../../common/Btn";
 
 import './TemplatesList.css';
 import {ErrorView} from "../../../views/ErrorView";
@@ -27,15 +26,17 @@ export const TemplatesList = () => {
 
     return (
         <>
-            {
+            <div className="templates">
+                {
 
-                templates.templatesList.map(template => <Template
-                    key={template.id}
-                    template={template}
-                />)
+                    templates.templatesList.map(template => <Template
+                        key={template.id}
+                        template={template}
+                    />)
 
-            }
-            <Btn to="/" text='Powród do głównego widoku aplikacji'/>
+                }
+            </div>
+
         </>
     )
 }

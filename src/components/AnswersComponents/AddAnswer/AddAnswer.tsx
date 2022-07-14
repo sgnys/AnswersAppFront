@@ -63,7 +63,7 @@ export const AddAnswer = () => {
 
                 const data: AnswerEntity = await res.json();
 
-                setResultInfo(`Nowa odpowiedź w kategorii ${form.category}, została dodana.`);
+                setResultInfo(`Nowa odpowiedź w kategorii ${form.category} została dodana.`);
 
             } catch (error: any) {
                 setError(error.message);
@@ -86,91 +86,112 @@ export const AddAnswer = () => {
 
     if (resultInfo !== null) {
         return (
-            <div>
-                <p><strong>{resultInfo}</strong></p>
-                <button onClick={() => setResultInfo(null)}>Dodaj kolejną odpowiedź</button>
-                <Btn to="/" text='Powród do głównego widoku aplikacji'/>
-            </div>
-
+            <>
+                <div className="result-info">
+                    <p><strong>{resultInfo}</strong></p>
+                </div>
+                <div className="result-info-btns">
+                    <button onClick={() => setResultInfo(null)}>Dodaj kolejną odpowiedź</button>
+                    <Btn to="/" text='Powród do głównego widoku aplikacji'/>
+                </div>
+            </>
         )
     }
 
     return (
         <>
-            <h2>Dodaj Odpowiedź</h2>
+            <div className="wrap">
+                <h2 className="answer-title">Dodaj Odpowiedź</h2>
 
-            <form onSubmit={sendForm}>
-                <div>
-                    <label>
-                        Rodzaj szablonu
-                        <select
-                            name="templateId"
-                            value={form.templateId ?? ""}
-                            onChange={e => updateForm("templateId", e.target.value)}
-                        >
-                            <>
-                                <option value="">Pusty</option>
-                                {
-                                    templates.templatesList.map(template => (
-                                        <option key={template.id} value={template.id}>
-                                            {template.name === CustomerOrConsultant.CUSTOMER ? 'Klient' : 'Konsultant'}
-                                        </option>
-                                    ))
-                                }
+                <form onSubmit={sendForm} className="answer-form">
+                    <div className="answer-form-wrap">
+                        <div className="answer-template">
+                            <label>
+                                <span>Rodzaj szablonu</span>
+                                <select
+                                    name="templateId"
+                                    value={form.templateId ?? ""}
+                                    onChange={e => updateForm("templateId", e.target.value)}
+                                >
+                                    <>
+                                        <option value="">Pusty</option>
+                                        {
+                                            templates.templatesList.map(template => (
+                                                <option key={template.id} value={template.id}>
+                                                    {template.name === CustomerOrConsultant.CUSTOMER ? 'Klient' : 'Konsultant'}
+                                                </option>
+                                            ))
+                                        }
 
-                            </>
-                        </select>
-                    </label>
-                    <br/>
-                    <br/>
+                                    </>
+                                </select>
+                            </label>
+                        </div>
 
-                    <label> Podaj treść:
-                        <textarea
-                            name="text"
-                            value={form.text}
-                            onChange={e => updateForm("text", e.target.value)}
-                            placeholder="Wpisz..."></textarea>
-                        {form.text.trim().length < 3 &&
-                            <span className='span-validation'>Treść odpowiedzi musi posiadać minimum 3 znaki</span>}
-                        <br/>
-                    </label>
+                        <div className="answer-text">
+                            <label> <span>Podaj treść:</span>
+                                <textarea
+                                    name="text"
+                                    value={form.text}
+                                    onChange={e => updateForm("text", e.target.value)}
+                                    placeholder="Wpisz..."></textarea>
+                                {form.text.trim().length < 3 &&
+                                    <span
+                                        className='span-validation'>Treść odpowiedzi musi posiadać minimum 3 znaki</span>}
+                            </label>
+                        </div>
 
-                    <label>
-                        <input type="radio" value={AnswerGroupEnum.IT} checked={form.category === AnswerGroupEnum.IT}
-                               onChange={e => updateForm('category', e.target.value)}
-                        />
-                        IT
-                    </label>
-                    <label>
-                        <input type="radio" value={AnswerGroupEnum.TELCO}
-                               checked={form.category === AnswerGroupEnum.TELCO}
-                               onChange={e => updateForm('category', e.target.value)}
-                        />
+                        <div className="categories">
+                            <div className="category-element">
+                                <label>
+                                    <input type="radio" value={AnswerGroupEnum.IT}
+                                           checked={form.category === AnswerGroupEnum.IT}
+                                           onChange={e => updateForm('category', e.target.value)}
+                                    />
+                                    IT
+                                </label>
+                            </div>
 
-                        TELCO
-                    </label>
-                    <label>
-                        <input type="radio" value={AnswerGroupEnum.PREPAID}
-                               checked={form.category === AnswerGroupEnum.PREPAID}
-                               onChange={e => updateForm('category', e.target.value)}
-                        />
+                            <div className="category-element">
+                                <label>
+                                    <input type="radio" value={AnswerGroupEnum.TELCO}
+                                           checked={form.category === AnswerGroupEnum.TELCO}
+                                           onChange={e => updateForm('category', e.target.value)}
+                                    />
 
-                        PREPAID
-                    </label>
-                    <label>
-                        <input type="radio" value={AnswerGroupEnum.OTHER}
-                               checked={form.category === AnswerGroupEnum.OTHER}
-                               onChange={e => updateForm('category', e.target.value)}
-                        />
+                                    TELCO
+                                </label>
+                            </div>
 
-                        INNE
-                        {form.category === "" && <span className='span-validation'>Wybierz kategorię odpowiedzi</span>}
-                    </label>
-                </div>
-                <br/>
-                <br/>
-                <Btn text="Zapisz"/>
-            </form>
+                            <div className="category-element">
+                                <label>
+                                    <input type="radio" value={AnswerGroupEnum.PREPAID}
+                                           checked={form.category === AnswerGroupEnum.PREPAID}
+                                           onChange={e => updateForm('category', e.target.value)}
+                                    />
+
+                                    PREPAID
+                                </label>
+                            </div>
+
+                            <div className="category-element">
+                                <label>
+                                    <input type="radio" value={AnswerGroupEnum.OTHER}
+                                           checked={form.category === AnswerGroupEnum.OTHER}
+                                           onChange={e => updateForm('category', e.target.value)}
+                                    />
+
+                                    INNE
+                                    {form.category === "" &&
+                                        <span className='span-validation'>Wybierz kategorię odpowiedzi</span>}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <Btn text="Zapisz"/>
+                </form>
+            </div>
             <Btn to="/" text='Powród do głównego widoku aplikacji'/>
         </>
     )

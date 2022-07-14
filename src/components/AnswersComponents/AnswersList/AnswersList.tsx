@@ -24,7 +24,7 @@ export const AnswersList = () => {
         }
     }, [category])
 
-    if(error) return <ErrorView message={error}/>
+    if (error) return <ErrorView message={error}/>
     if (data === null) return <Spinner/>
 
     const filterTasks: AnswerEntity[] = [...data.answersList].filter(answer => {
@@ -44,19 +44,21 @@ export const AnswersList = () => {
             </section>
 
             <section className='answers-search'>
-                <p>Ilość wyświetlanych odpowiedzi: {filterTasks.length}</p>
-                <label htmlFor="search">
-                    Wyszukaj:
-                    <input
-                        type='search'
-                        id='search'
-                        placeholder='szukaj...'
-                        value={searchText}
-                        onChange={(e)=> setSearch(e.target.value)}
-                    />
-                </label>
+                <div className="search">
+                    <label htmlFor="search">
+                        Wyszukaj:
+                        <input
+                            type='search'
+                            id='search'
+                            placeholder='szukaj...'
+                            value={searchText}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                    </label>
+                    <p>Ilość znalezionych: <span>{filterTasks.length}</span></p>
+                </div>
             </section>
-
+            {/*<hr/>*/}
             <section className="answers-list">
                 <AnswerContent
                     answersList={filterTasks}

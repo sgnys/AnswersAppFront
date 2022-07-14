@@ -1,0 +1,14 @@
+.wrap {
+    display:flex;
+    flex-direction: column;
+    position: relative;
+    max-width: 1440px;
+    margin: 50px auto;
+    background-color: black;
+    box-shadow: 0 0 5px 5px white;
+}
+
+.manage {
+    display: flex;
+    padding:30px;
+}
