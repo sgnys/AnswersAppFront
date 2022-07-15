@@ -1,0 +1,51 @@
+.answer-wrap{
+    display:flex;
+    flex-direction: column;
+    margin: 25px 25px;
+    padding: 10px;
+    border: 4px solid black;
+    box-shadow: 0 0 4px 4px white;
+}
+
+.answer-dates{
+    display: flex;
+}
+
+.answer-element{
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.answer-dates span, .answer-category-span{
+    font-size: 14px;
+    color: rgb(57, 229, 229);
+}
+
+.answer-category-content{
+    display: flex;
+    flex-grow: 1;
+}
+
+.answer-category-span{
+    align-self: flex-end;
+}
+
+.answer-dates span.answer-dates-modified{
+    margin-left: 10px;
+}
+
+.answer-btns{
+    display: flex;
+    /*flex-grow: 1;*/
+}
+
+.answer-btns button, .answer-btns .btn-links{
+    padding:3px;
+    align-self: flex-end;
+    width: 90px;
+    line-height: 18px;
+    text-transform: lowercase;
+    text-align: center;
+    font-size: 14px;
+
+}

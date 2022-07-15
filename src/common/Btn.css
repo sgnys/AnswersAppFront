@@ -1,0 +1,26 @@
+button, .btn-links {
+    /*display:inline-block;*/
+    display: block;
+    max-width:500px;
+    margin:10px;
+    background-color: white;
+    padding: 2px 35px;
+    color: black;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: 1px solid black;
+    border-radius: 2px;
+    line-height: 30px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover, .btn-links:hover{
+    background-color: black;
+    color:white;
+    border-color: white;
+
+}

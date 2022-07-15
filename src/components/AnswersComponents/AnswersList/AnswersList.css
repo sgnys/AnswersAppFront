@@ -1,0 +1,43 @@
+
+.answers-sort {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 10px;
+    padding: 20px;
+}
+
+.answers-search {
+    margin: 10px;
+    padding: 20px;
+}
+
+.search {
+    display: flex;
+
+}
+
+.search label, .search input {
+    height: 30px;
+}
+
+.search input {
+    margin:0 10px;
+    padding-left: 5px;
+}
+
+.search span {
+    height: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(57, 229, 229);
+    text-shadow: 1px 1px rgb(57, 229, 229);
+
+
+}
+
+.answers-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

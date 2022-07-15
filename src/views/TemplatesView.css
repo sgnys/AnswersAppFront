@@ -1,0 +1,16 @@
+h2.templates-title{
+    padding:20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+p.templates-info{
+   margin:10px;
+    font-size: 22px;
+    text-align: center;
+}
+
+.wrap + .btn-links{
+    display:block;
+    margin:30px auto;
+}

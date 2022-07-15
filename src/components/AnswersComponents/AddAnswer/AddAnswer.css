@@ -1,0 +1,77 @@
+h2.answer-title, h2.template-title{
+    padding:20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.answer-form{
+    margin:50px auto 100px;
+    padding:30px;
+    min-width:1200px;
+    background-color: black;
+    box-shadow: 0 0 2px 2px white;
+}
+
+.answer-form-wrap, .template-form-wrap{
+    display:flex;
+    flex-direction: column;
+}
+
+.answer-form-wrap span, .template-form-wrap span{
+    text-transform: uppercase;
+}
+
+.answer-template{
+    margin:10px 0 20px;
+}
+
+.answer-template select {
+    margin-left: 10px;
+}
+
+.answer-text label{
+    display:flex;
+    margin:20px 0;
+}
+
+.answer-text textarea{
+    margin: 0 0 0 57px;
+    padding:10px;
+    width:500px;
+    height: 150px;
+}
+
+.answer-text span{
+ align-self: center;
+}
+
+.categories{
+    display:flex;
+    margin:20px 0;
+}
+
+.category-element{
+    margin: 10px;
+}
+
+.category-element input{
+    margin:5px;
+}
+
+.result-info{
+    margin:150px auto 100px;
+    padding:30px;
+    background-color: black;
+    box-shadow: 0 0 2px 2px white;
+    font-size: 30px;
+    text-align: center;
+}
+
+.result-info span{
+    color: rgb(57, 229, 229);
+}
+
+.result-info-btns{
+    display: flex;
+    justify-content: space-around;
+}
